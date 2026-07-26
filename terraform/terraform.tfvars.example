@@ -1,0 +1,11 @@
+# Copy this file to terraform.tfvars and fill in real values.
+# terraform.tfvars is gitignored - never commit real secrets.
+
+aws_region   = "us-east-1"
+project_name = "aws-ha-platform"
+
+db_password = "CHANGE_ME_use_a_real_password"
+alert_email = "you@example.com"
+
+# Leave blank to keep SSH disabled entirely (SSM Session Manager is used instead)
+admin_cidr = ""
