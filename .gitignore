@@ -16,3 +16,4 @@ override.tf.json
 
 # OS
 .DS_Store
+terraform/lambda/remediate.zip
