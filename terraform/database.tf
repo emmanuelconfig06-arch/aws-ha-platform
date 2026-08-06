@@ -23,7 +23,7 @@ resource "aws_db_instance" "main" {
   db_subnet_group_name   = aws_db_subnet_group.main.name
   vpc_security_group_ids = [aws_security_group.db.id]
 
-  backup_retention_period = 7
+  backup_retention_period = 1
   deletion_protection     = false # set true once this is more than a portfolio project
   skip_final_snapshot     = true  # ditto - keeps teardown simple while learning
 
