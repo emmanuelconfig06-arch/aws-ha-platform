@@ -1,7 +1,7 @@
 # Self-healing, observable AWS infrastructure platform
 
 A highly-available 3-tier AWS environment, provisioned entirely with Terraform,
-with automated failure detection and remediation.
+with automated failure detection and a documented, tested recovery process.
 
 ## Why this project exists
 
@@ -31,17 +31,25 @@ screenshots/  Console/CLI evidence of the running system
 
 ## Status
 
-Work in progress — see commit history for build order:
-1. Repo scaffold (this commit)
-2. Terraform: networking + compute
-3. Terraform: database + monitoring/remediation
-4. Simulated incident + runbook
-5. Cost review + final writeup
+Fully deployed and tested:
+1. ✅ Repo scaffold
+2. ✅ Architecture diagram
+3. ✅ Terraform — deployed live, verified traffic balancing across both AZs
+4. ✅ Simulated incident + runbook (see below)
+5. ⬜ Cost review + final writeup
 
 ## Incident highlight
 
-_Coming soon: a documented simulated outage — detection, diagnosis, and
-automated resolution — linked here once complete._
+To validate the self-healing design, I manually terminated a running EC2
+instance and traced the full detection/recovery chain through CloudWatch,
+Lambda logs, and Auto Scaling Group activity history — including an
+unexpected finding about which mechanism actually drove the recovery.
+
+📄 [Full runbook: EC2 termination simulation](runbooks/2026-08-06-ec2-termination-simulation.md)
+
+**Result:** zero downtime. The ALB kept routing traffic to the healthy
+instance in the second AZ for the ~13 minutes it took the ASG to launch and
+health-check a replacement.
 
 ## Cost
 
