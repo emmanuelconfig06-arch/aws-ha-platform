@@ -53,4 +53,30 @@ health-check a replacement.
 
 ## Cost
 
-_Coming soon: monthly cost breakdown and optimization notes._
+Actual spend, verified via Cost Explorer, for the period this environment was
+deployed:
+
+| Service | Cost | % of total |
+|---|---|---|
+| RDS (Multi-AZ) | $59.69 | 80% |
+| EC2-Other (NAT Gateway) | $7.12 | 10% |
+| Elastic Load Balancing | $3.08 | 4% |
+| EC2 Instances | $2.79 | 4% |
+| VPC | $2.03 | 3% |
+| **Total** | **$74.71** | |
+
+An AWS Budget alarm set at $25/month (forecasted-cost alert) correctly fired
+partway through, forecasting $34.65 for the month — a useful confirmation
+that the budget alarm itself works, not just the infrastructure.
+
+**Takeaway:** RDS Multi-AZ dominates the bill, as expected — running two
+database instances (primary + standby) roughly doubles the RDS cost
+compared to single-AZ. For a real production workload this trade-off is
+usually worth it for the automatic failover; for a learning environment,
+switching to `multi_az = false` would cut the single largest cost by close
+to half with no change to the rest of the architecture.
+
+**If I were optimizing this further:**
+- Switch RDS to single-AZ for non-critical/dev environments, Multi-AZ only for prod
+- Replace the single NAT Gateway with NAT instances for a dev environment (NAT Gateway bills hourly regardless of traffic; a NAT instance on a small EC2 type can be cheaper at low volume)
+- Add a scheduled Lambda to stop the ASG/RDS outside business hours for a non-production version of this stack
