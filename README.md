@@ -51,6 +51,14 @@ unexpected finding about which mechanism actually drove the recovery.
 instance in the second AZ for the ~13 minutes it took the ASG to launch and
 health-check a replacement.
 
+## Note on current state
+
+This environment was deployed, tested (including the incident simulation
+above), and torn down with `terraform destroy` after documentation was
+complete — standard practice to avoid ongoing cost for a project that isn't
+serving live traffic. All resources can be redeployed from this repo with
+`terraform apply`.
+
 ## Cost
 
 Actual spend, verified via Cost Explorer, for the period this environment was
