@@ -36,7 +36,7 @@ Fully deployed and tested:
 2. ✅ Architecture diagram
 3. ✅ Terraform — deployed live, verified traffic balancing across both AZs
 4. ✅ Simulated incident + runbook (see below)
-5. ⬜ Cost review + final writeup
+5. ✅ Cost review + final writeup (see below)
 
 ## Incident highlight
 
